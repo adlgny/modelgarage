@@ -1,1 +1,542 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Model Garage</title>
+  <meta name="description" content="Model Garage — Die-Cast Cars, Lego ve RC Cars galerisi" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#090a0c;
+      --bg-soft:#12141a;
+      --card:rgba(255,255,255,.05);
+      --line:rgba(255,255,255,.08);
+      --text:#f4f7fb;
+      --muted:#b5bcc8;
+      --red:#ff3b30;
+      --red-soft:#ff5d55;
+      --shadow:0 28px 80px rgba(0,0,0,.42);
+      --radius:28px;
+      --container:1180px;
+    }
 
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top, rgba(255,59,48,.12), transparent 25%),
+        linear-gradient(180deg,#0b0d11 0%,#070809 100%);
+    }
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    .container{width:min(calc(100% - 32px),var(--container));margin:0 auto}
+
+    .topbar{
+      position:sticky;top:0;z-index:99;
+      backdrop-filter:blur(16px);
+      background:rgba(9,10,12,.72);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .topbar-inner{
+      min-height:76px;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+    }
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand-logo{
+      width:48px;height:48px;border-radius:14px;
+      display:grid;place-items:center;
+      background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.08);
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .brand-logo img{width:100%;height:100%;object-fit:cover}
+    .brand h1{margin:0;font-size:1rem;font-weight:800;letter-spacing:-.03em}
+    .brand h1 span{color:var(--red)}
+    .brand p{margin:3px 0 0;color:var(--muted);font-size:.78rem}
+
+    .nav{display:flex;gap:10px;flex-wrap:wrap}
+    .nav a{
+      color:var(--muted);
+      padding:10px 14px;border-radius:999px;transition:.25s ease;
+    }
+    .nav a:hover,.nav a.active{background:rgba(255,255,255,.07);color:var(--text)}
+
+    .page{display:none}
+    .page.active{display:block}
+
+    .hero{padding:62px 0 28px}
+    .hero-wrap{
+      display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:stretch;
+    }
+    .hero-copy,.hero-visual{
+      min-height:540px;border-radius:32px;overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);
+    }
+    .hero-copy{
+      padding:42px;
+      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.03));
+      display:flex;flex-direction:column;justify-content:center;
+    }
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;width:max-content;
+      padding:10px 14px;border-radius:999px;
+      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+      color:#dce2ec;font-size:.84rem;margin-bottom:18px;
+    }
+    .hero-copy h2{
+      margin:0;font-size:clamp(2.7rem,5vw,5.2rem);line-height:.94;letter-spacing:-.06em;
+      max-width:10ch;
+    }
+    .hero-copy h2 .accent{color:var(--red)}
+    .hero-copy .lead{
+      margin:18px 0 0;color:var(--muted);line-height:1.8;max-width:58ch;font-size:1.03rem;
+    }
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+    .button{
+      min-height:52px;padding:0 20px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;
+      font-weight:600;transition:.25s ease;border:1px solid transparent;
+      cursor:pointer;
+    }
+    .button.primary{background:linear-gradient(135deg,var(--red),var(--red-soft));color:#fff;box-shadow:0 18px 34px rgba(255,59,48,.24)}
+    .button.ghost{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1)}
+    .button:hover{transform:translateY(-2px)}
+    .hero-note{margin-top:28px;color:var(--muted);font-size:.93rem}
+
+    .hero-visual{
+      position:relative;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.56)),
+        center/cover no-repeat;
+      display:flex;align-items:flex-end;padding:24px;
+    }
+    .hero-glass{
+      max-width:340px;margin-left:auto;padding:18px 20px;border-radius:22px;
+      background:rgba(9,10,12,.58);backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,.08)
+    }
+    .hero-glass strong{display:block;margin-bottom:8px;font-size:1.05rem}
+    .hero-glass span{color:var(--muted);line-height:1.65;font-size:.94rem}
+
+    .section{padding:28px 0}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:20px}
+    .section-head h3{margin:0;font-size:clamp(1.8rem,3vw,3rem);letter-spacing:-.05em}
+    .section-head p{margin:0;color:var(--muted);max-width:58ch;line-height:1.75}
+
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .gallery-card{
+      position:relative;min-height:420px;border-radius:30px;overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);
+      display:flex;align-items:end;padding:24px;transition:.28s ease;
+      background-size:cover;background-position:center;
+    }
+    .gallery-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.16)}
+    .gallery-card::before{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.02) 14%,rgba(0,0,0,.78) 100%);
+    }
+    .gallery-card > div{position:relative;z-index:1}
+    .gallery-card .pill{
+      display:inline-block;padding:8px 12px;border-radius:999px;margin-bottom:12px;
+      border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.08);font-size:.82rem;
+    }
+    .gallery-card h4{margin:0 0 10px;font-size:2rem;letter-spacing:-.04em}
+    .gallery-card p{margin:0 0 16px;color:#dbe1eb;line-height:1.68;max-width:32ch}
+
+    .split{display:grid;grid-template-columns:1.08fr .92fr;gap:20px}
+    .panel{
+      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.08);border-radius:30px;box-shadow:var(--shadow)
+    }
+    .story{padding:28px}
+    .story h4{margin:0 0 10px;font-size:1.55rem;letter-spacing:-.03em}
+    .story p{margin:0;color:var(--muted);line-height:1.9}
+    .mini-stack{display:grid;gap:12px;padding:14px}
+    .mini-card{overflow:hidden;border-radius:22px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)}
+    .mini-card img{width:100%;aspect-ratio:16/10;object-fit:cover}
+    .mini-card div{padding:14px;color:var(--muted);line-height:1.65;font-size:.92rem}
+
+    .gallery-head{padding:42px 0 14px}
+    .back-link{display:inline-flex;gap:10px;align-items:center;color:var(--muted);margin-bottom:18px}
+    .gallery-head h2{margin:0;font-size:clamp(2.2rem,4vw,4.1rem);letter-spacing:-.055em}
+    .gallery-head p{margin:14px 0 0;color:var(--muted);max-width:68ch;line-height:1.85}
+    .history{
+      margin-top:22px;padding:22px;border-radius:24px;
+      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow)
+    }
+    .history strong{display:block;margin-bottom:10px;font-size:1.08rem}
+    .history span{color:var(--muted);line-height:1.85}
+
+    .masonry{columns:3 280px;column-gap:18px;margin-top:22px}
+    .item{
+      break-inside:avoid;margin-bottom:18px;border-radius:22px;overflow:hidden;
+      background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow)
+    }
+    .item img{width:100%;object-fit:cover;transition:transform .38s ease}
+    .item:hover img{transform:scale(1.03)}
+    .item .meta{padding:14px 15px 16px}
+    .item strong{display:block;margin-bottom:6px}
+    .item span{color:var(--muted);font-size:.92rem;line-height:1.6}
+
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:40px 0 70px}
+    .contact-card{
+      padding:28px;border-radius:30px;
+      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow)
+    }
+    .contact-card h2,.contact-card h3{margin:0 0 12px;letter-spacing:-.04em}
+    .contact-card p{margin:0 0 18px;color:var(--muted);line-height:1.82}
+    .contact-list{display:grid;gap:12px}
+    .contact-row{
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+      padding:16px 18px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)
+    }
+    .contact-row small{display:block;margin-top:4px;color:var(--muted)}
+
+    .footer{padding:24px 0 46px;color:#95a1b0;font-size:.92rem}
+    .footer-inner{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.08);padding-top:20px}
+
+    .floating-wa{
+      position:fixed;right:18px;bottom:18px;z-index:98;
+      display:inline-flex;align-items:center;gap:10px;padding:14px 18px;border-radius:999px;
+      background:linear-gradient(135deg,var(--red),var(--red-soft));color:#fff;font-weight:700;
+      box-shadow:0 18px 35px rgba(255,59,48,.25)
+    }
+
+    @media (max-width:1080px){
+      .hero-wrap,.gallery-grid,.split,.contact-grid{grid-template-columns:1fr}
+      .hero-copy,.hero-visual{min-height:420px}
+    }
+    @media (max-width:760px){
+      .topbar-inner{flex-direction:column;align-items:flex-start;padding:12px 0}
+      .hero-copy{padding:28px}
+      .hero-copy h2{max-width:none}
+      .section-head{flex-direction:column;align-items:flex-start}
+      .masonry{columns:1 260px}
+      .floating-wa{left:16px;right:16px;justify-content:center}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="?page=home" aria-label="Model Garage ana sayfa">
+        <div class="brand-logo">
+          <img data-base="logo" alt="Model Garage logo">
+        </div>
+        <div>
+          <h1>Model <span>Garage</span></h1>
+          <p>Her modelin bir hikayesi vardır.</p>
+        </div>
+      </a>
+      <nav class="nav">
+        <a data-nav="home" href="?page=home">Ana Sayfa</a>
+        <a data-nav="galleries" href="?page=galleries">Galeriler</a>
+        <a data-nav="contact" href="?page=contact">İletişim</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page" id="page-home">
+      <div class="hero">
+        <div class="container hero-wrap">
+          <div class="hero-copy">
+            <div class="eyebrow">Premium koleksiyon vitrini</div>
+            <h2>Minyatür dünyanın <span class="accent">seçili</span> yüzü.</h2>
+            <p class="lead">Model Garage; die-cast otomobiller, Lego yarış araçları ve RC kültüründen ilham alan seçili bir galeri deneyimi sunar. Ana sayfa sade tutuldu, detaylı içerik galerilerin içinde yer alıyor.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="?page=galleries">Galerilere Git</a>
+              <a class="button ghost" href="?page=contact">İletişim</a>
+            </div>
+            <div class="hero-note">Kategori detayları ve yoğun görsel akış yalnızca galeri sayfalarında açılır.</div>
+          </div>
+          <div class="hero-visual" data-bg="hero-main">
+            <div class="hero-glass">
+              <strong>Seçilmiş vitrin</strong>
+              <span>Koleksiyonunun öne çıkan görselleri girişte güçlü ama sade bir ilk izlenim oluşturur.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h3>Galeriler</h3>
+              <p>Her kategori kendi sayfasında açılır. Böylece ana sayfa kalabalık olmaz, ziyaretçiler ilgilendikleri bölümü daha rahat inceler.</p>
+            </div>
+          </div>
+          <div class="gallery-grid">
+            <a class="gallery-card" data-bg="diecast-cover" href="?page=die-cast">
+              <div>
+                <div class="pill">Die-Cast Cars</div>
+                <h4>Metal minyatürler</h4>
+                <p>Hot Wheels, Majorette, setler ve seçili kutulu parçalar için ayrı vitrin.</p>
+                <span class="button ghost">Aç</span>
+              </div>
+            </a>
+            <a class="gallery-card" data-bg="lego-cover" href="?page=lego">
+              <div>
+                <div class="pill">Lego</div>
+                <h4>Yarış ve yapı hissi</h4>
+                <p>F1 temalı Lego modeller için daha teknik ve daha sade bir galeri akışı.</p>
+                <span class="button ghost">Aç</span>
+              </div>
+            </a>
+            <a class="gallery-card" data-bg="rc-cover" href="?page=rc-cars">
+              <div>
+                <div class="pill">RC Cars</div>
+                <h4>Hız kültürü</h4>
+                <p>RC tarihçesi ve performans hissi odaklı ayrı bölüm.</p>
+                <span class="button ghost">Aç</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container split">
+          <div class="panel story">
+            <h4>Daha temiz başlangıç</h4>
+            <p>Bu sürümde önceki beğendiğin ana sayfa hissi geri geldi: büyük kahraman alanı, sade metinler ve sadece üç ana kategori. Galeriler, tarihçe metinleri ve detaylı görseller artık ilgili sayfalara taşındı. Böylece ana sayfa daha premium, daha nefes alan ve daha kurumsal görünüyor.</p>
+          </div>
+          <div class="panel mini-stack">
+            <div class="mini-card">
+              <img data-base="logo" alt="Model Garage logo görseli">
+              <div>Logo için sade bir vitrin alanı. Sonraki adımda bunu daha da güçlendirebiliriz.</div>
+            </div>
+            <div class="mini-card">
+              <img data-base="home-secondary" alt="Ana sayfa ikincil görseli">
+              <div>Ana sayfanın ikinci görsel alanı için tek bir güçlü kare kullanılır, fazla içerik yüklenmez.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="page" id="page-galleries">
+      <div class="container gallery-head">
+        <h2>Galeriler</h2>
+        <p>Üç ayrı sınıf için hazırlanmış sayfalara buradan geçilir. Her sayfada kısa tarihçe ve düzenli bir görsel akış bulunur.</p>
+      </div>
+      <div class="container gallery-grid">
+        <a class="gallery-card" data-bg="diecast-cover" href="?page=die-cast"><div><div class="pill">Die-Cast Cars</div><h4>Metal minyatürler</h4><p>Kutulu koleksiyonlar ve seçili seriler.</p><span class="button ghost">Aç</span></div></a>
+        <a class="gallery-card" data-bg="lego-cover" href="?page=lego"><div><div class="pill">Lego</div><h4>F1 ve teknik modeller</h4><p>Yarış odaklı Lego bölümü.</p><span class="button ghost">Aç</span></div></a>
+        <a class="gallery-card" data-bg="rc-cover" href="?page=rc-cars"><div><div class="pill">RC Cars</div><h4>Kontrol ve hız</h4><p>RC kültüründen ilham alan bölüm.</p><span class="button ghost">Aç</span></div></a>
+      </div>
+    </section>
+
+    <section class="page" id="page-die-cast">
+      <div class="container gallery-head">
+        <a class="back-link" href="?page=galleries">← Galerilere dön</a>
+        <h2>Die-Cast Cars</h2>
+        <p>Hot Wheels, Majorette ve seçili setlerin bir araya geldiği metal minyatür galeri.</p>
+        <div class="history"><strong>Kısa tarihçe</strong><span>Die-cast model otomobiller, metal kalıplama tekniği sayesinde detaylı ve dayanıklı minyatürler üretme fikrini yaygınlaştırdı. Hot Wheels’in 1968’de çıkışıyla koleksiyon kültürü daha büyük bir kitleye ulaştı ve zamanla özel seriler, lisanslı modeller ve tematik kutular bu dünyanın en dikkat çeken parçaları haline geldi.</span></div>
+      </div>
+      <div class="container masonry" id="diecast-gallery"></div>
+    </section>
+
+    <section class="page" id="page-lego">
+      <div class="container gallery-head">
+        <a class="back-link" href="?page=galleries">← Galerilere dön</a>
+        <h2>Lego</h2>
+        <p>Yarış ruhunu, yapı hissini ve takım kimliğini öne çıkaran Lego galeri alanı.</p>
+        <div class="history"><strong>Kısa tarihçe</strong><span>LEGO Group 1932’de kuruldu ve birbirine geçen yapı sistemiyle küresel bir tasarım kültürü oluşturdu. Zamanla araç odaklı serilerle otomobil tutkunlarının da ilgisini çekti. Özellikle yarış ve Formula 1 temalı setler, mühendislik duygusunu minyatür ölçekte yeniden kurmalarıyla dikkat çekiyor.</span></div>
+      </div>
+      <div class="container masonry" id="lego-gallery"></div>
+    </section>
+
+    <section class="page" id="page-rc-cars">
+      <div class="container gallery-head">
+        <a class="back-link" href="?page=galleries">← Galerilere dön</a>
+        <h2>RC Cars</h2>
+        <p>Uzaktan kumandalı araç kültürünün hız ve kontrol hissinden beslenen bölüm.</p>
+        <div class="history"><strong>Kısa tarihçe</strong><span>RC otomobil hobisi, radyo kontrol teknolojisinin yaygınlaşmasıyla modelcilik dünyasında önemli bir alan haline geldi. Pist, drift ve off-road gibi farklı stiller zamanla kendi topluluklarını oluşturdu. Bu bölüm, RC dünyasının hız, mekanik ve performans duygusunu yansıtan bir vitrin mantığıyla kurgulandı.</span></div>
+      </div>
+      <div class="container masonry" id="rc-gallery"></div>
+    </section>
+
+    <section class="page" id="page-contact">
+      <div class="container contact-grid">
+        <div class="contact-card">
+          <h2>İletişim</h2>
+          <p>Koleksiyon hakkında soru sormak, detay istemek veya özel bir model için iletişime geçmek istersen aşağıdaki kanalları kullanabilirsin.</p>
+          <div class="contact-list">
+            <div class="contact-row">
+              <div><strong>E-posta</strong><small>Ana iletişim adresi</small></div>
+              <a href="mailto:info@modelgarage.com">info@modelgarage.com</a>
+            </div>
+            <div class="contact-row">
+              <div><strong>WhatsApp</strong><small>Ayrıntılı bilgi ve hızlı geri dönüş</small></div>
+              <a href="#" id="wa-link">Mesaj Gönder</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <h3>Hızlı erişim</h3>
+          <p>Hazır mesaj ile açılan WhatsApp bağlantısı sayesinde doğrudan ayrıntılı bilgi alınabilir.</p>
+          <a class="button primary" href="#" id="wa-button">WhatsApp ile Ayrıntılı Bilgi Al</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="floating-wa" href="#" id="wa-float">WhatsApp</a>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© 2026 Model Garage</div>
+      <div>Die-Cast Cars • Lego • RC Cars</div>
+    </div>
+  </footer>
+
+  <script>
+    const validPages = ['home','galleries','die-cast','lego','rc-cars','contact'];
+
+    const diecastItems = [
+      ['diecast-cover','Die-Cast vitrini','Kategori giriş görseli olarak kullanılan ana kare.'],
+      ['diecast-bmw-m1','BMW M1','Silver Series içinde öne çıkan güçlü kart tasarımı.'],
+      ['diecast-bmw-m3','1992 BMW M3','Motorsport çizgileriyle koleksiyon etkisini güçlendirir.'],
+      ['diecast-ff-set','Fast & Furious seti','Tematik kutu tasarımı galeriye güçlü bir karakter katar.'],
+      ['diecast-mercedes','Majorette Mercedes-AMG A35','Farklı marka dili sayesinde vitrine çeşit ekler.'],
+      ['diecast-lambo','Majorette Lamborghini Huracán Avio','Koyu tonlu güçlü bir premium görünüm verir.'],
+      ['diecast-firebird','Pontiac Firebird','Klasik muscle-car ruhunu taşıyan etkili bir parça.'],
+      ['diecast-collection','Toplu koleksiyon görünümü','Çeşitliliği tek karede gösteren destekleyici fotoğraf.']
+    ];
+
+    const legoItems = [
+      ['lego-cover','Lego kategori kapağı','Lego galerisine girişte kullanılan ana kare.'],
+      ['lego-mercedes-front','Mercedes F1 ön görünüm','Lego kategorisi için ana model.'],
+      ['lego-mercedes-angle','Mercedes F1 yan açı','Daha sinematik bir kompozisyon.']
+    ];
+
+    const rcItems = [
+      ['rc-cover','RC Cars kategori kapağı','RC sayfasına performans odaklı giriş sağlayan ana görsel.'],
+      ['rc-detail-1','Performans hissi','Mekanik ve aerodinamik duyguyu destekleyen bir kare.'],
+      ['rc-detail-2','Pist odaklı kompozisyon','Hız ve denge duygusunu öne çıkaran düzen.'],
+      ['rc-detail-3','Teknik bakış','RC kültürüne uygun teknik yaklaşım hissi verir.']
+    ];
+
+    const exts = ['jpg','jpeg','png','webp','JPG','JPEG','PNG','WEBP'];
+
+    function resolveImage(baseName) {
+      return new Promise((resolve) => {
+        let i = 0;
+        function tryNext() {
+          if (i >= exts.length) {
+            resolve('');
+            return;
+          }
+          const candidate = `${baseName}.${exts[i++]}`;
+          const img = new Image();
+          img.onload = () => resolve(candidate);
+          img.onerror = tryNext;
+          img.src = candidate;
+        }
+        tryNext();
+      });
+    }
+
+    async function applyResolvedImages() {
+      const imgNodes = [...document.querySelectorAll('[data-base]')];
+      for (const node of imgNodes) {
+        const src = await resolveImage(node.dataset.base);
+        if (src) node.src = src;
+      }
+
+      const bgNodes = [...document.querySelectorAll('[data-bg]')];
+      for (const node of bgNodes) {
+        const src = await resolveImage(node.dataset.bg);
+        if (src) {
+          const overlay = node.classList.contains('hero-visual')
+            ? `linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.56)), url('${src}') center/cover no-repeat`
+            : `linear-gradient(180deg,rgba(0,0,0,.02) 14%,rgba(0,0,0,.78) 100%), url('${src}') center/cover no-repeat`;
+          node.style.background = overlay;
+        }
+      }
+    }
+
+    async function renderGallery(targetId, items){
+      const root = document.getElementById(targetId);
+      if(!root) return;
+
+      let html = '';
+      for (const [base,title,text] of items) {
+        const src = await resolveImage(base);
+        if (!src) continue;
+        html += `
+          <article class="item">
+            <img src="${src}" alt="${title}">
+            <div class="meta">
+              <strong>${title}</strong>
+              <span>${text}</span>
+            </div>
+          </article>
+        `;
+      }
+      root.innerHTML = html;
+    }
+
+    function getPage(){
+      const page = new URLSearchParams(window.location.search).get('page') || 'home';
+      return validPages.includes(page) ? page : 'home';
+    }
+
+    function setActivePage(page){
+      document.querySelectorAll('.page').forEach(section => {
+        section.classList.toggle('active', section.id === `page-${page}`);
+      });
+      document.querySelectorAll('[data-nav]').forEach(link => {
+        link.classList.toggle('active', link.dataset.nav === page);
+      });
+      window.scrollTo({top:0,behavior:'auto'});
+    }
+
+    function buildWhatsAppUrl(topic='Genel bilgi'){
+      const phone = ['90543','6060906'].join('');
+      const text = `${topic} hakkında ayrıntılı bilgi almak istiyorum.`;
+      return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+    }
+
+    function syncWhatsAppLinks(){
+      const page = getPage();
+      const topicMap = {
+        'home':'Model Garage',
+        'galleries':'Galeriler',
+        'die-cast':'Die-Cast Cars',
+        'lego':'Lego',
+        'rc-cars':'RC Cars',
+        'contact':'İletişim'
+      };
+      const url = buildWhatsAppUrl(topicMap[page] || 'Model Garage');
+      ['wa-link','wa-button','wa-float'].forEach(id => {
+        const el = document.getElementById(id);
+        if(el){
+          el.href = url;
+          el.target = '_blank';
+          el.rel = 'noopener noreferrer';
+        }
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      await applyResolvedImages();
+      await renderGallery('diecast-gallery', diecastItems);
+      await renderGallery('lego-gallery', legoItems);
+      await renderGallery('rc-gallery', rcItems);
+      setActivePage(getPage());
+      syncWhatsAppLinks();
+    });
+  </script>
+</body>
+</html>
