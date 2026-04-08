@@ -113,7 +113,7 @@
       position:relative;
       background:
         linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.56)),
-        center/cover no-repeat;
+        url('hero-main.jfif') center/cover no-repeat;
       display:flex;align-items:flex-end;padding:24px;
     }
     .hero-glass{
@@ -148,6 +148,10 @@
     }
     .gallery-card h4{margin:0 0 10px;font-size:2rem;letter-spacing:-.04em}
     .gallery-card p{margin:0 0 16px;color:#dbe1eb;line-height:1.68;max-width:32ch}
+
+    .diecast{background-image:url('diecast-cover.jpg')}
+    .lego{background-image:url('lego-cover.jfif')}
+    .rc{background-image:url('rc-cover.jpg')}
 
     .split{display:grid;grid-template-columns:1.08fr .92fr;gap:20px}
     .panel{
@@ -229,7 +233,7 @@
     <div class="container topbar-inner">
       <a class="brand" href="?page=home" aria-label="Model Garage ana sayfa">
         <div class="brand-logo">
-          <img data-base="logo" alt="Model Garage logo">
+          <img src="logo.PNG" alt="Model Garage logo">
         </div>
         <div>
           <h1>Model <span>Garage</span></h1>
@@ -258,7 +262,7 @@
             </div>
             <div class="hero-note">Kategori detayları ve yoğun görsel akış yalnızca galeri sayfalarında açılır.</div>
           </div>
-          <div class="hero-visual" data-bg="hero-main">
+          <div class="hero-visual">
             <div class="hero-glass">
               <strong>Seçilmiş vitrin</strong>
               <span>Koleksiyonunun öne çıkan görselleri girişte güçlü ama sade bir ilk izlenim oluşturur.</span>
@@ -276,7 +280,7 @@
             </div>
           </div>
           <div class="gallery-grid">
-            <a class="gallery-card" data-bg="diecast-cover" href="?page=die-cast">
+            <a class="gallery-card diecast" href="?page=die-cast">
               <div>
                 <div class="pill">Die-Cast Cars</div>
                 <h4>Metal minyatürler</h4>
@@ -284,7 +288,7 @@
                 <span class="button ghost">Aç</span>
               </div>
             </a>
-            <a class="gallery-card" data-bg="lego-cover" href="?page=lego">
+            <a class="gallery-card lego" href="?page=lego">
               <div>
                 <div class="pill">Lego</div>
                 <h4>Yarış ve yapı hissi</h4>
@@ -292,7 +296,7 @@
                 <span class="button ghost">Aç</span>
               </div>
             </a>
-            <a class="gallery-card" data-bg="rc-cover" href="?page=rc-cars">
+            <a class="gallery-card rc" href="?page=rc-cars">
               <div>
                 <div class="pill">RC Cars</div>
                 <h4>Hız kültürü</h4>
@@ -312,11 +316,11 @@
           </div>
           <div class="panel mini-stack">
             <div class="mini-card">
-              <img data-base="logo" alt="Model Garage logo görseli">
+              <img src="logo.PNG" alt="Model Garage logo görseli">
               <div>Logo için sade bir vitrin alanı. Sonraki adımda bunu daha da güçlendirebiliriz.</div>
             </div>
             <div class="mini-card">
-              <img data-base="home-secondary" alt="Ana sayfa ikincil görseli">
+              <img src="home-secondary.jpg" alt="Ana sayfa ikincil görseli">
               <div>Ana sayfanın ikinci görsel alanı için tek bir güçlü kare kullanılır, fazla içerik yüklenmez.</div>
             </div>
           </div>
@@ -330,9 +334,9 @@
         <p>Üç ayrı sınıf için hazırlanmış sayfalara buradan geçilir. Her sayfada kısa tarihçe ve düzenli bir görsel akış bulunur.</p>
       </div>
       <div class="container gallery-grid">
-        <a class="gallery-card" data-bg="diecast-cover" href="?page=die-cast"><div><div class="pill">Die-Cast Cars</div><h4>Metal minyatürler</h4><p>Kutulu koleksiyonlar ve seçili seriler.</p><span class="button ghost">Aç</span></div></a>
-        <a class="gallery-card" data-bg="lego-cover" href="?page=lego"><div><div class="pill">Lego</div><h4>F1 ve teknik modeller</h4><p>Yarış odaklı Lego bölümü.</p><span class="button ghost">Aç</span></div></a>
-        <a class="gallery-card" data-bg="rc-cover" href="?page=rc-cars"><div><div class="pill">RC Cars</div><h4>Kontrol ve hız</h4><p>RC kültüründen ilham alan bölüm.</p><span class="button ghost">Aç</span></div></a>
+        <a class="gallery-card diecast" href="?page=die-cast"><div><div class="pill">Die-Cast Cars</div><h4>Metal minyatürler</h4><p>Kutulu koleksiyonlar ve seçili seriler.</p><span class="button ghost">Aç</span></div></a>
+        <a class="gallery-card lego" href="?page=lego"><div><div class="pill">Lego</div><h4>F1 ve teknik modeller</h4><p>Yarış odaklı Lego bölümü.</p><span class="button ghost">Aç</span></div></a>
+        <a class="gallery-card rc" href="?page=rc-cars"><div><div class="pill">RC Cars</div><h4>Kontrol ve hız</h4><p>RC kültüründen ilham alan bölüm.</p><span class="button ghost">Aç</span></div></a>
       </div>
     </section>
 
@@ -343,7 +347,29 @@
         <p>Hot Wheels, Majorette ve seçili setlerin bir araya geldiği metal minyatür galeri.</p>
         <div class="history"><strong>Kısa tarihçe</strong><span>Die-cast model otomobiller, metal kalıplama tekniği sayesinde detaylı ve dayanıklı minyatürler üretme fikrini yaygınlaştırdı. Hot Wheels’in 1968’de çıkışıyla koleksiyon kültürü daha büyük bir kitleye ulaştı ve zamanla özel seriler, lisanslı modeller ve tematik kutular bu dünyanın en dikkat çeken parçaları haline geldi.</span></div>
       </div>
-      <div class="container masonry" id="diecast-gallery"></div>
+      <div class="container masonry">
+        <article class="item"><img src="diecast-cover.jpg" alt="Die-Cast vitrini"><div class="meta"><strong>Die-Cast vitrini</strong><span>Kategori giriş görseli olarak kullanılan ana kare.</span></div></article>
+        <article class="item"><img src="diecast-bmw-all.JPEG" alt="BMW serisi toplu görünüm"><div class="meta"><strong>BMW serisi</strong><span>Silver Series BMW koleksiyonunu toplu gösteren güçlü vitrin görseli.</span></div></article>
+        <article class="item"><img src="diecast-bmw-m1.JPEG" alt="BMW M1"><div class="meta"><strong>BMW M1</strong><span>Serinin en karakteristik kart tasarımlarından biri.</span></div></article>
+        <article class="item"><img src="diecast-bmw-m3.JPEG" alt="1992 BMW M3"><div class="meta"><strong>1992 BMW M3</strong><span>Motorsport çizgileriyle öne çıkan klasik koleksiyon parçası.</span></div></article>
+        <article class="item"><img src="diecast-bmw-m2.JPEG" alt="BMW M2"><div class="meta"><strong>BMW M2</strong><span>Daha modern BMW çizgisiyle seri içinde güçlü bir denge kuruyor.</span></div></article>
+        <article class="item"><img src="diecast-bmw-m4.JPEG" alt="BMW M4"><div class="meta"><strong>BMW M4</strong><span>Performans hissini daha çağdaş bir yorumla sunuyor.</span></div></article>
+        <article class="item"><img src="diecast-bmw-m5.JPEG" alt="BMW M5"><div class="meta"><strong>BMW M5</strong><span>Sedan karakteriyle seriye çeşitlilik katıyor.</span></div></article>
+        <article class="item"><img src="diecast-bmw-truck.JPEG" alt="BMW taşıyıcı"><div class="meta"><strong>BMW taşıyıcı</strong><span>Farklı formu sayesinde galeride ayrı bir dikkat noktası oluşturuyor.</span></div></article>
+        <article class="item"><img src="diecast-ff-set.jpg" alt="Fast and Furious seti"><div class="meta"><strong>Fast & Furious seti</strong><span>Tematik kutu tasarımı galeriye güçlü bir karakter katıyor.</span></div></article>
+        <article class="item"><img src="diecast-fastfurious-series.JPEG" alt="Fast and Furious serisi"><div class="meta"><strong>Fast & Furious serisi</strong><span>Seri odaklı koleksiyon yapısını destekleyen kutulu görünüm.</span></div></article>
+        <article class="item"><img src="diecast-fastfurious-series1.JPEG" alt="Fast and Furious serisi detay"><div class="meta"><strong>Fast & Furious detay</strong><span>Koleksiyonun sinema temalı tarafını güçlendiren ek kare.</span></div></article>
+        <article class="item"><img src="diecast-firebird.JPEG" alt="Pontiac Firebird"><div class="meta"><strong>Pontiac Firebird</strong><span>Klasik muscle-car ruhunu taşıyan güçlü siluet.</span></div></article>
+        <article class="item"><img src="diecast-charger.JPEG" alt="Dodge Charger"><div class="meta"><strong>Dodge Charger</strong><span>Koyu tonlu kart tasarımı ile daha sert bir karakter sunuyor.</span></div></article>
+        <article class="item"><img src="diecast-gtr.jpg" alt="Nissan GTR"><div class="meta"><strong>Nissan GT-R</strong><span>Modern Japon performans çizgisini temsil eden destekleyici kare.</span></div></article>
+        <article class="item"><img src="diecast-majo-lambo.JPEG" alt="Majorette Lamborghini"><div class="meta"><strong>Majorette Lamborghini Huracán Avio</strong><span>Koyu gövde ve sarı detaylarla premium görünüm veriyor.</span></div></article>
+        <article class="item"><img src="diecast-majo-mercedes.JPEG" alt="Majorette Mercedes"><div class="meta"><strong>Majorette Mercedes-AMG A35</strong><span>Farklı marka dili sayesinde vitrine çeşit ekliyor.</span></div></article>
+        <article class="item"><img src="diecast-mix-2.JPEG" alt="Karışık koleksiyon 2"><div class="meta"><strong>Karışık koleksiyon</strong><span>Loose ve kutulu modelleri aynı akışta gösteren bir görünüm.</span></div></article>
+        <article class="item"><img src="diecast-mix-3.JPEG" alt="Karışık koleksiyon 3"><div class="meta"><strong>Koleksiyon masası</strong><span>Farklı modellerin birlikte algısını güçlendiren ikinci açı.</span></div></article>
+        <article class="item"><img src="diecast-mix-4.JPEG" alt="Karışık koleksiyon 4"><div class="meta"><strong>Seçili parçalar</strong><span>Die-cast bölümünü daha canlı ve zengin gösteren ek kare.</span></div></article>
+        <article class="item"><img src="diecast-police.JPEG" alt="Police model"><div class="meta"><strong>Police model</strong><span>Koleksiyon içinde farklı tema hissi veren özel bir parça.</span></div></article>
+        <article class="item"><img src="diecast-wall-collection.webp" alt="Duvar koleksiyonu"><div class="meta"><strong>Duvar koleksiyonu</strong><span>Vitrin hissi veren tamamlayıcı dış görsel.</span></div></article>
+      </div>
     </section>
 
     <section class="page" id="page-lego">
@@ -353,7 +379,13 @@
         <p>Yarış ruhunu, yapı hissini ve takım kimliğini öne çıkaran Lego galeri alanı.</p>
         <div class="history"><strong>Kısa tarihçe</strong><span>LEGO Group 1932’de kuruldu ve birbirine geçen yapı sistemiyle küresel bir tasarım kültürü oluşturdu. Zamanla araç odaklı serilerle otomobil tutkunlarının da ilgisini çekti. Özellikle yarış ve Formula 1 temalı setler, mühendislik duygusunu minyatür ölçekte yeniden kurmalarıyla dikkat çekiyor.</span></div>
       </div>
-      <div class="container masonry" id="lego-gallery"></div>
+      <div class="container masonry">
+        <article class="item"><img src="lego-cover.jfif" alt="Lego kategori kapağı"><div class="meta"><strong>Lego kategori kapağı</strong><span>Lego galerisine girişte kullanılan ana görsel.</span></div></article>
+        <article class="item"><img src="lego-mercedes-front.JPEG" alt="Mercedes F1 ön görünüm"><div class="meta"><strong>Mercedes F1 ön görünüm</strong><span>Lego kategorisinde merkez model olarak öne çıkıyor.</span></div></article>
+        <article class="item"><img src="lego-mercedes-angle.JPEG" alt="Mercedes F1 yan açı"><div class="meta"><strong>Mercedes F1 yan açı</strong><span>Daha sinematik ve daha teknik bir kompozisyon.</span></div></article>
+        <article class="item"><img src="lego-mclaren.webp" alt="Lego McLaren"><div class="meta"><strong>Lego McLaren</strong><span>Kategoriye farklı takım kimliği ve renk çeşitliliği katıyor.</span></div></article>
+        <article class="item"><img src="lego-williams.jfif" alt="Lego Williams"><div class="meta"><strong>Lego Williams</strong><span>Galeri akışını daha zengin hale getiren ek takım görseli.</span></div></article>
+      </div>
     </section>
 
     <section class="page" id="page-rc-cars">
@@ -363,7 +395,12 @@
         <p>Uzaktan kumandalı araç kültürünün hız ve kontrol hissinden beslenen bölüm.</p>
         <div class="history"><strong>Kısa tarihçe</strong><span>RC otomobil hobisi, radyo kontrol teknolojisinin yaygınlaşmasıyla modelcilik dünyasında önemli bir alan haline geldi. Pist, drift ve off-road gibi farklı stiller zamanla kendi topluluklarını oluşturdu. Bu bölüm, RC dünyasının hız, mekanik ve performans duygusunu yansıtan bir vitrin mantığıyla kurgulandı.</span></div>
       </div>
-      <div class="container masonry" id="rc-gallery"></div>
+      <div class="container masonry">
+        <article class="item"><img src="rc-cover.jpg" alt="RC Cars kategori kapağı"><div class="meta"><strong>RC Cars kategori kapağı</strong><span>RC bölümüne girişte kullanılan ana görsel.</span></div></article>
+        <article class="item"><img src="rc-ferrari-front.JPEG" alt="RC Ferrari ön görünüm"><div class="meta"><strong>RC Ferrari ön görünüm</strong><span>Performans hissini öne çıkaran güçlü bir açı.</span></div></article>
+        <article class="item"><img src="rc-ferrari-angle.JPEG" alt="RC Ferrari açı"><div class="meta"><strong>RC Ferrari açı</strong><span>Daha hareketli ve daha akışkan bir kompozisyon.</span></div></article>
+        <article class="item"><img src="rc-ferrari-side.JPEG" alt="RC Ferrari yan görünüm"><div class="meta"><strong>RC Ferrari yan görünüm</strong><span>RC kategorisindeki ana model için tamamlayıcı görsel.</span></div></article>
+      </div>
     </section>
 
     <section class="page" id="page-contact">
@@ -402,90 +439,6 @@
 
   <script>
     const validPages = ['home','galleries','die-cast','lego','rc-cars','contact'];
-
-    const diecastItems = [
-      ['diecast-cover','Die-Cast vitrini','Kategori giriş görseli olarak kullanılan ana kare.'],
-      ['diecast-bmw-m1','BMW M1','Silver Series içinde öne çıkan güçlü kart tasarımı.'],
-      ['diecast-bmw-m3','1992 BMW M3','Motorsport çizgileriyle koleksiyon etkisini güçlendirir.'],
-      ['diecast-ff-set','Fast & Furious seti','Tematik kutu tasarımı galeriye güçlü bir karakter katar.'],
-      ['diecast-mercedes','Majorette Mercedes-AMG A35','Farklı marka dili sayesinde vitrine çeşit ekler.'],
-      ['diecast-lambo','Majorette Lamborghini Huracán Avio','Koyu tonlu güçlü bir premium görünüm verir.'],
-      ['diecast-firebird','Pontiac Firebird','Klasik muscle-car ruhunu taşıyan etkili bir parça.'],
-      ['diecast-collection','Toplu koleksiyon görünümü','Çeşitliliği tek karede gösteren destekleyici fotoğraf.']
-    ];
-
-    const legoItems = [
-      ['lego-cover','Lego kategori kapağı','Lego galerisine girişte kullanılan ana kare.'],
-      ['lego-mercedes-front','Mercedes F1 ön görünüm','Lego kategorisi için ana model.'],
-      ['lego-mercedes-angle','Mercedes F1 yan açı','Daha sinematik bir kompozisyon.']
-    ];
-
-    const rcItems = [
-      ['rc-cover','RC Cars kategori kapağı','RC sayfasına performans odaklı giriş sağlayan ana görsel.'],
-      ['rc-detail-1','Performans hissi','Mekanik ve aerodinamik duyguyu destekleyen bir kare.'],
-      ['rc-detail-2','Pist odaklı kompozisyon','Hız ve denge duygusunu öne çıkaran düzen.'],
-      ['rc-detail-3','Teknik bakış','RC kültürüne uygun teknik yaklaşım hissi verir.']
-    ];
-
-    const exts = ['jpg','jpeg','png','webp','JPG','JPEG','PNG','WEBP'];
-
-    function resolveImage(baseName) {
-      return new Promise((resolve) => {
-        let i = 0;
-        function tryNext() {
-          if (i >= exts.length) {
-            resolve('');
-            return;
-          }
-          const candidate = `${baseName}.${exts[i++]}`;
-          const img = new Image();
-          img.onload = () => resolve(candidate);
-          img.onerror = tryNext;
-          img.src = candidate;
-        }
-        tryNext();
-      });
-    }
-
-    async function applyResolvedImages() {
-      const imgNodes = [...document.querySelectorAll('[data-base]')];
-      for (const node of imgNodes) {
-        const src = await resolveImage(node.dataset.base);
-        if (src) node.src = src;
-      }
-
-      const bgNodes = [...document.querySelectorAll('[data-bg]')];
-      for (const node of bgNodes) {
-        const src = await resolveImage(node.dataset.bg);
-        if (src) {
-          const overlay = node.classList.contains('hero-visual')
-            ? `linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.56)), url('${src}') center/cover no-repeat`
-            : `linear-gradient(180deg,rgba(0,0,0,.02) 14%,rgba(0,0,0,.78) 100%), url('${src}') center/cover no-repeat`;
-          node.style.background = overlay;
-        }
-      }
-    }
-
-    async function renderGallery(targetId, items){
-      const root = document.getElementById(targetId);
-      if(!root) return;
-
-      let html = '';
-      for (const [base,title,text] of items) {
-        const src = await resolveImage(base);
-        if (!src) continue;
-        html += `
-          <article class="item">
-            <img src="${src}" alt="${title}">
-            <div class="meta">
-              <strong>${title}</strong>
-              <span>${text}</span>
-            </div>
-          </article>
-        `;
-      }
-      root.innerHTML = html;
-    }
 
     function getPage(){
       const page = new URLSearchParams(window.location.search).get('page') || 'home';
@@ -529,11 +482,7 @@
       });
     }
 
-    window.addEventListener('DOMContentLoaded', async () => {
-      await applyResolvedImages();
-      await renderGallery('diecast-gallery', diecastItems);
-      await renderGallery('lego-gallery', legoItems);
-      await renderGallery('rc-gallery', rcItems);
+    window.addEventListener('DOMContentLoaded', () => {
       setActivePage(getPage());
       syncWhatsAppLinks();
     });
